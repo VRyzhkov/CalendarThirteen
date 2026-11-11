@@ -60,19 +60,27 @@ const seasons = [
 
 const weekdays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 const calendar = document.querySelector("#calendar");
-const today = new Date();
-const todayAtMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-const thisYearsStart = new Date(today.getFullYear(), 1, 5);
-const currentYear = todayAtMidnight >= thisYearsStart ? today.getFullYear() : today.getFullYear() - 1;
-const isLeapYear = currentYear % 4 === 0 && (currentYear % 100 !== 0 || currentYear % 400 === 0);
+
+function symbolicYearStart(year) {
+  const springEquinox = new Date(year, 2, 20);
+  springEquinox.setDate(springEquinox.getDate() - 45);
+  return springEquinox;
+}
 
 function utcDayNumber(date) {
   return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000;
 }
 
+const today = new Date();
+const todayAtMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+const thisYearsStart = symbolicYearStart(today.getFullYear());
+const currentYear = todayAtMidnight >= thisYearsStart ? today.getFullYear() : today.getFullYear() - 1;
+const currentYearStart = symbolicYearStart(currentYear);
+const nextYearStart = symbolicYearStart(currentYear + 1);
+const isLeapYear = utcDayNumber(nextYearStart) - utcDayNumber(currentYearStart) === 366;
+
 function currentCalendarDate() {
-  const yearStart = new Date(currentYear, 1, 5);
-  const elapsedDay = utcDayNumber(todayAtMidnight) - utcDayNumber(yearStart) + 1;
+  const elapsedDay = utcDayNumber(todayAtMidnight) - utcDayNumber(currentYearStart) + 1;
   const leapDayPosition = 113;
   const sunDayPosition = 169 + (isLeapYear ? 1 : 0);
 
