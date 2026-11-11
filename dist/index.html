@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Calendar Thirteen — симметричный календарь из тринадцати месяцев по двадцать восемь дней."
+    />
+    <title>Calendar Thirteen</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">364 + 1</p>
+          <h1>Calendar<br />Thirteen</h1>
+          <p class="intro">
+            Тринадцать равных месяцев. Четыре сезона. Пятьдесят две полные недели.
+          </p>
+        </div>
+
+        <div class="year-control" aria-label="Тип года">
+          <span class="year-control__label">Режим года</span>
+          <button class="year-toggle" type="button" aria-pressed="false">
+            <span class="year-toggle__value">Обычный · 365</span>
+            <span class="year-toggle__hint">Переключить</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="legend" aria-label="Условные обозначения">
+        <span><i class="legend__dot legend__dot--active"></i>дни сезона</span>
+        <span><i class="legend__dot legend__dot--muted"></i>часть соседнего сезона</span>
+        <span><strong>№</strong> номер недели года</span>
+      </section>
+
+      <div id="calendar" class="calendar" aria-live="polite"></div>
+
+      <footer class="footer">
+        <p>Каждый месяц начинается в понедельник и содержит ровно четыре недели.</p>
+        <p>Вненедельные дни не сдвигают недельный цикл.</p>
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
