@@ -290,6 +290,20 @@ h1 {
   font-weight: 850;
 }
 
+.month td.has-sun-day {
+  white-space: nowrap;
+}
+
+.sun-day {
+  display: inline-block;
+  margin-left: 4px;
+  color: var(--summer);
+  font-size: 0.9em;
+  line-height: 1;
+  text-shadow: 0 0 8px color-mix(in srgb, var(--summer) 70%, transparent);
+  vertical-align: 0.04em;
+}
+
 .intercalary {
   display: flex;
   align-items: center;

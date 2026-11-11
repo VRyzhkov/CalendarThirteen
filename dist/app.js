@@ -71,11 +71,19 @@ function monthCard(month, season) {
       const yearDay = month.startDay + monthDay - 1;
       const isOutside = yearDay < season.start || yearDay > season.end;
       const isMarker = yearDay === season.marker;
-      const classes = [isOutside ? "is-outside" : "", isMarker ? "is-marker" : ""]
+      const hasSunDayAfter = season.id === "summer" && month.index === 6 && monthDay === 28;
+      const classes = [
+        isOutside ? "is-outside" : "",
+        isMarker ? "is-marker" : "",
+        hasSunDayAfter ? "has-sun-day" : "",
+      ]
         .filter(Boolean)
         .join(" ");
+      const dayContent = hasSunDayAfter
+        ? `${monthDay}<span class="sun-day" role="img" aria-label="После этого числа — День Солнца">☀</span>`
+        : monthDay;
 
-      return `<td${classes ? ` class="${classes}"` : ""}>${monthDay}</td>`;
+      return `<td${classes ? ` class="${classes}"` : ""}>${dayContent}</td>`;
     }).join("");
 
     return `<tr><td aria-label="Неделя ${weekNumber}">${weekNumber}</td>${cells}</tr>`;
@@ -102,15 +110,13 @@ function monthCard(month, season) {
 }
 
 function intercalaryDays() {
+  if (!isLeapYear) return "";
+
   return `
     <div class="intercalary-list" aria-label="Вненедельные дни">
-      <div class="intercalary" data-intercalary="leap" ${isLeapYear ? "" : "hidden"}>
+      <div class="intercalary" data-intercalary="leap">
         <span class="intercalary__name">Високосный день</span>
         <span class="intercalary__position">после 28 Квадритерциадецимы</span>
-      </div>
-      <div class="intercalary" data-intercalary="sun">
-        <span class="intercalary__name">День Солнца</span>
-        <span class="intercalary__position">после 28 Секстерциадецимы</span>
       </div>
     </div>`;
 }
