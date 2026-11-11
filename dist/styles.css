@@ -290,6 +290,19 @@ h1 {
   font-weight: 850;
 }
 
+.day-number {
+  display: inline-grid;
+  width: 1.75em;
+  height: 1.75em;
+  place-items: center;
+}
+
+.day-number.is-current {
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-weight: 850;
+}
+
 .month td.has-sun-day {
   white-space: nowrap;
 }
@@ -302,6 +315,12 @@ h1 {
   line-height: 1;
   text-shadow: 0 0 8px color-mix(in srgb, var(--summer) 70%, transparent);
   vertical-align: 0.04em;
+}
+
+.sun-day.is-current {
+  outline: 1.5px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 50%;
 }
 
 .intercalary {

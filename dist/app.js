@@ -60,8 +60,39 @@ const seasons = [
 
 const weekdays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 const calendar = document.querySelector("#calendar");
-const currentYear = new Date().getFullYear();
+const today = new Date();
+const todayAtMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+const thisYearsStart = new Date(today.getFullYear(), 1, 5);
+const currentYear = todayAtMidnight >= thisYearsStart ? today.getFullYear() : today.getFullYear() - 1;
 const isLeapYear = currentYear % 4 === 0 && (currentYear % 100 !== 0 || currentYear % 400 === 0);
+
+function utcDayNumber(date) {
+  return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000;
+}
+
+function currentCalendarDate() {
+  const yearStart = new Date(currentYear, 1, 5);
+  const elapsedDay = utcDayNumber(todayAtMidnight) - utcDayNumber(yearStart) + 1;
+  const leapDayPosition = 113;
+  const sunDayPosition = 169 + (isLeapYear ? 1 : 0);
+
+  if (isLeapYear && elapsedDay === leapDayPosition) return { type: "leap" };
+  if (elapsedDay === sunDayPosition) return { type: "sun" };
+
+  const baseDay =
+    elapsedDay -
+    (isLeapYear && elapsedDay > leapDayPosition ? 1 : 0) -
+    (elapsedDay > sunDayPosition ? 1 : 0);
+
+  return {
+    type: "month",
+    baseDay,
+    month: Math.floor((baseDay - 1) / 28) + 1,
+    day: ((baseDay - 1) % 28) + 1,
+  };
+}
+
+const currentDate = currentCalendarDate();
 
 function monthCard(month, season) {
   const rows = Array.from({ length: 4 }, (_, weekOffset) => {
@@ -72,6 +103,11 @@ function monthCard(month, season) {
       const isOutside = yearDay < season.start || yearDay > season.end;
       const isMarker = yearDay === season.marker;
       const hasSunDayAfter = season.id === "summer" && month.index === 6 && monthDay === 28;
+      const isCurrentDay =
+        currentDate.type === "month" &&
+        currentDate.month === month.index &&
+        currentDate.day === monthDay &&
+        !isOutside;
       const classes = [
         isOutside ? "is-outside" : "",
         isMarker ? "is-marker" : "",
@@ -79,9 +115,12 @@ function monthCard(month, season) {
       ]
         .filter(Boolean)
         .join(" ");
+      const dayNumber = `<span class="day-number${isCurrentDay ? " is-current" : ""}"${
+        isCurrentDay ? ' aria-label="Сегодня"' : ""
+      }>${monthDay}</span>`;
       const dayContent = hasSunDayAfter
-        ? `${monthDay}<span class="sun-day" role="img" aria-label="После этого числа — День Солнца">☀</span>`
-        : monthDay;
+        ? `${dayNumber}<span class="sun-day${currentDate.type === "sun" ? " is-current" : ""}" role="img" aria-label="После этого числа — День Солнца">☀</span>`
+        : dayNumber;
 
       return `<td${classes ? ` class="${classes}"` : ""}>${dayContent}</td>`;
     }).join("");
