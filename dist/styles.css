@@ -165,46 +165,23 @@ h1 {
 
 .season {
   --accent: var(--spring);
+  --season-surface: #10160e;
   position: relative;
-  padding: 26px;
-  border: 1px solid var(--line);
-  background: var(--surface);
 }
 
 .season[data-season="summer"] {
   --accent: var(--summer);
+  --season-surface: #181409;
 }
 
 .season[data-season="autumn"] {
   --accent: var(--autumn);
+  --season-surface: #180f0c;
 }
 
 .season[data-season="winter"] {
   --accent: var(--winter);
-}
-
-.season__heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 22px;
-}
-
-.season__title {
-  margin: 0;
-  color: var(--accent);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(30px, 2.7vw, 48px);
-  font-weight: 400;
-  letter-spacing: -0.035em;
-}
-
-.season__range {
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  --season-surface: #0d1318;
 }
 
 .season__months {
@@ -216,8 +193,10 @@ h1 {
 .month {
   min-width: 0;
   padding: 16px;
-  border-top: 2px solid var(--accent);
-  background: var(--surface-raised);
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--line));
+  border-top-width: 2px;
+  border-radius: 10px;
+  background: var(--season-surface);
 }
 
 .month__heading {
@@ -397,17 +376,13 @@ h1 {
   }
 
   .season {
-    padding: 18px 12px 12px;
-  }
-
-  .season__heading {
-    align-items: flex-end;
+    padding: 0;
   }
 
   .season__months {
     display: flex;
-    margin: 0 -12px;
-    padding: 0 12px 8px;
+    margin: 0;
+    padding: 0 0 8px;
     gap: 10px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -500,26 +475,12 @@ h1 {
     min-height: 0;
     flex: 1;
     grid-template-rows: repeat(4, minmax(0, 1fr));
-    gap: 6px;
+    gap: 8px;
   }
 
   .season {
     min-height: 0;
-    padding: 6px 10px;
-  }
-
-  .season__heading {
-    min-height: 20px;
-    margin-bottom: 3px;
-  }
-
-  .season__title {
-    font-size: clamp(21px, 1.8vw, 27px);
-  }
-
-  .season__range {
-    font-size: 7px;
-    letter-spacing: 0.09em;
+    padding: 0;
   }
 
   .season__months {
@@ -532,8 +493,10 @@ h1 {
   }
 
   .month__heading {
+    width: 88%;
+    max-width: 320px;
     min-height: 19px;
-    margin-bottom: 3px;
+    margin: 0 auto 3px;
   }
 
   .month__identity {
@@ -583,8 +546,9 @@ h1 {
 
   .intercalary-list {
     position: absolute;
-    top: 7px;
-    right: 98px;
+    z-index: 2;
+    top: -6px;
+    right: 10px;
     display: flex;
     gap: 5px;
   }

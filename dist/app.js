@@ -124,11 +124,7 @@ function renderCalendar() {
         .join("");
 
       return `
-        <section class="season" data-season="${season.id}" aria-labelledby="${season.id}-title">
-          <header class="season__heading">
-            <h2 class="season__title" id="${season.id}-title">${season.title}</h2>
-            <span class="season__range">${season.range}</span>
-          </header>
+        <section class="season" data-season="${season.id}" aria-label="${season.title}">
           <div class="season__months">${cards}</div>
           ${season.id === "summer" ? intercalaryDays() : ""}
         </section>`;
