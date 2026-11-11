@@ -106,13 +106,15 @@ function monthCard(month, season) {
 
 function intercalaryDays() {
   return `
-    <div class="intercalary" data-intercalary="leap" ${isLeapYear ? "" : "hidden"}>
-      <span class="intercalary__name">Високосный день</span>
-      <span class="intercalary__position">после 28 Квадритерциадецимы</span>
-    </div>
-    <div class="intercalary" data-intercalary="sun">
-      <span class="intercalary__name">День Солнца</span>
-      <span class="intercalary__position">после 28 Секстерциадецимы</span>
+    <div class="intercalary-list" aria-label="Вненедельные дни">
+      <div class="intercalary" data-intercalary="leap" ${isLeapYear ? "" : "hidden"}>
+        <span class="intercalary__name">Високосный день</span>
+        <span class="intercalary__position">после 28 Квадритерциадецимы</span>
+      </div>
+      <div class="intercalary" data-intercalary="sun">
+        <span class="intercalary__name">День Солнца</span>
+        <span class="intercalary__position">после 28 Секстерциадецимы</span>
+      </div>
     </div>`;
 }
 
