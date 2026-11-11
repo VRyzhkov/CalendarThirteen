@@ -60,10 +60,8 @@ const seasons = [
 
 const weekdays = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 const calendar = document.querySelector("#calendar");
-const yearToggle = document.querySelector(".year-toggle");
-const yearToggleValue = document.querySelector(".year-toggle__value");
-
-let isLeapYear = false;
+const currentYear = new Date().getFullYear();
+const isLeapYear = currentYear % 4 === 0 && (currentYear % 100 !== 0 || currentYear % 400 === 0);
 
 function monthCard(month, season) {
   const rows = Array.from({ length: 4 }, (_, weekOffset) => {
@@ -137,12 +135,5 @@ function renderCalendar() {
     })
     .join("");
 }
-
-yearToggle.addEventListener("click", () => {
-  isLeapYear = !isLeapYear;
-  yearToggle.setAttribute("aria-pressed", String(isLeapYear));
-  yearToggleValue.textContent = isLeapYear ? "Високосный · 366" : "Обычный · 365";
-  renderCalendar();
-});
 
 renderCalendar();
