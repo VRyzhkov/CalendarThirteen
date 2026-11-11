@@ -222,11 +222,18 @@ h1 {
 
 .month__heading {
   display: flex;
-  min-height: 55px;
-  align-items: flex-start;
+  min-height: 34px;
+  align-items: baseline;
   justify-content: space-between;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+}
+
+.month__identity {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .month__index {
@@ -237,20 +244,24 @@ h1 {
 }
 
 .month__name {
-  margin: 2px 0 0;
-  overflow-wrap: anywhere;
+  display: flex;
+  min-width: 0;
+  margin: 0;
+  gap: 6px;
+  overflow: hidden;
   font-size: clamp(13px, 1vw, 17px);
   font-weight: 720;
   letter-spacing: -0.02em;
   line-height: 1.15;
+  white-space: nowrap;
 }
 
 .month__latin {
-  display: block;
-  margin-top: 5px;
+  display: inline;
+  margin: 0;
   color: var(--muted);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 10px;
+  font-size: 0.78em;
   font-style: italic;
   font-weight: 400;
   letter-spacing: 0;
@@ -503,7 +514,7 @@ h1 {
   }
 
   .season__title {
-    font-size: clamp(17px, 1.6vw, 23px);
+    font-size: clamp(21px, 1.8vw, 27px);
   }
 
   .season__range {
@@ -517,47 +528,57 @@ h1 {
   }
 
   .month {
-    padding: 4px 7px 5px;
+    padding: 5px 8px 7px;
   }
 
   .month__heading {
-    min-height: 25px;
-    margin-bottom: 2px;
+    min-height: 19px;
+    margin-bottom: 3px;
+  }
+
+  .month__identity {
+    gap: 5px;
   }
 
   .month__index {
-    font-size: 7px;
+    font-size: 9px;
   }
 
   .month__name {
-    margin-top: 0;
-    font-size: clamp(8px, 0.8vw, 11px);
+    gap: 4px;
+    font-size: clamp(10px, 0.9vw, 13px);
     line-height: 1.05;
   }
 
   .month__latin {
-    margin-top: 2px;
-    font-size: 7px;
+    margin: 0;
+    font-size: 0.76em;
   }
 
   .month__share {
-    font-size: 7px;
+    font-size: 8px;
+  }
+
+  .month table {
+    width: 88%;
+    max-width: 320px;
+    margin: 0 auto;
   }
 
   .month th {
-    height: 12px;
-    font-size: 6px;
+    height: 15px;
+    font-size: 7px;
   }
 
   .month td {
-    height: 15px;
-    font-size: clamp(7px, 0.65vw, 9px);
+    height: 24px;
+    font-size: clamp(9px, 0.78vw, 11px);
   }
 
   .month th:first-child,
   .month td:first-child {
-    width: 20px;
-    font-size: 6px;
+    width: 18px;
+    font-size: 7px;
   }
 
   .intercalary-list {
