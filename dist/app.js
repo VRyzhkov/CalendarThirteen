@@ -85,7 +85,6 @@ function monthCard(month, season) {
     <article class="month" aria-label="${month.russian}, месяц ${month.index}">
       <header class="month__heading">
         <div class="month__identity">
-          <span class="month__index">${String(month.index).padStart(2, "0")}</span>
           <h3 class="month__name">
             ${month.russian}
             <span class="month__latin">${month.latin}</span>

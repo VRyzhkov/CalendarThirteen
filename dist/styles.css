@@ -215,13 +215,6 @@ h1 {
   gap: 8px;
 }
 
-.month__index {
-  color: var(--accent);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-}
-
 .month__name {
   display: flex;
   min-width: 0;
@@ -239,16 +232,15 @@ h1 {
   display: inline;
   margin: 0;
   color: var(--muted);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.78em;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0;
+  font: inherit;
+  letter-spacing: inherit;
 }
 
 .month__share {
   color: var(--muted);
-  font-size: 10px;
+  font-size: clamp(13px, 1vw, 17px);
+  font-weight: 720;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
@@ -503,10 +495,6 @@ h1 {
     gap: 5px;
   }
 
-  .month__index {
-    font-size: 9px;
-  }
-
   .month__name {
     gap: 4px;
     font-size: clamp(10px, 0.9vw, 13px);
@@ -515,11 +503,10 @@ h1 {
 
   .month__latin {
     margin: 0;
-    font-size: 0.76em;
   }
 
   .month__share {
-    font-size: 8px;
+    font-size: clamp(10px, 0.9vw, 13px);
   }
 
   .month table {
